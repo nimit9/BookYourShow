@@ -1,5 +1,4 @@
 	<?php include('header.php');
-	// $qry2=mysqli_query($con,"select * from tbl_movie where movie_id='".$_GET['id']."'");
 	$qry2=mysqli_query($con,"select * from movie where movie_id='".$_GET['id']."'");
 	$movie=mysqli_fetch_array($qry2);
 	?>
@@ -21,7 +20,7 @@
 	</div>
 	<div class="clear"></div>
 	</div>
-	<?php $s=mysqli_query($con,"select DISTINCT theatre_id from tbl_shows where movie_id='".$movie['movie_id']."'");
+	<?php $s=mysqli_query($con,"select DISTINCT theatre from shows where movie_id='".$movie['movie_id']."'");
 	if(mysqli_num_rows($s))
 	{?>
 	<table class="table table-hover table-bordered text-center">
@@ -29,15 +28,11 @@
 
 	while($shw=mysqli_fetch_array($s))
 	{
-	$t=mysqli_query($con,"select * from tbl_theatre where id='".$shw['theatre_id']."'");
-	$theatre=mysqli_fetch_array($t);
+	
 	?>
 	<tr>
 	<td>
-	<?php echo $theatre['name'].", ".$theatre['place'];?>
-	</td>
-	<td>
-	<?php $tr=mysqli_query($con,"select * from tbl_shows where movie_id='".$movie['movie_id']."' and theatre_id='".$shw['theatre_id']."'");
+	<?php $tr=mysqli_query($con,"select * from shows where movie_id='".$movie['movie_id']."' and theatre='".$shw['theatre']."'");
 	while($shh=mysqli_fetch_array($tr))
 	{
 	$ttm=mysqli_query($con,"select  * from tbl_show_time where st_id='".$shh['st_id']."'");

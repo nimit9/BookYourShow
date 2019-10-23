@@ -445,7 +445,7 @@ INSERT INTO `user` (`username`, `name`, `password`, `email`, `phone_no`) VALUES
 ALTER TABLE `user`
   ADD PRIMARY KEY (`username`);
 
-COMMIT;
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
