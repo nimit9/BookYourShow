@@ -435,7 +435,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `name` varchar(100) NOT NULL,
   `password` varchar(50) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `phone_no` int(11) NOT NULL
+  `phone_no` varchar(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `user` (`username`, `name`, `password`, `email`, `phone_no`) VALUES
@@ -445,7 +445,7 @@ INSERT INTO `user` (`username`, `name`, `password`, `email`, `phone_no`) VALUES
 ALTER TABLE `user`
   ADD PRIMARY KEY (`username`);
 
-COMMIT;
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

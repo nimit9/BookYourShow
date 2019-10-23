@@ -28,7 +28,7 @@
     <!-- Dropdown --> 
        <li class="nav-item dropdown mr-5">
     <?php if(isset($_SESSION['user'])){
-			  		   $us=mysqli_query($con,"select * from tbl_registration where user_id='".$_SESSION['user']."'");
+			  		   $us=mysqli_query($con,"select * from user where username='".$_SESSION['user']."'");
        					$user=mysqli_fetch_array($us);?>
       <a class="nav-link dropdown-toggle; text-capitalize" href="profile.php" id="navbardrop" data-toggle="dropdown">
       <?php echo $user['name'];?>

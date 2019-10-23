@@ -15,6 +15,10 @@
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
+        <input name="Username" type="text" size="25" placeholder="Username" class="form-control"/>
+        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
         <input name="Password" type="password" size="25" placeholder="Password" class="form-control" placeholder="Password" />
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>

@@ -1,15 +1,15 @@
 <?php
 include('config.php');
 session_start();
-$email = $_POST["Email"];
+$username = $_POST["Username"];
 $pass = $_POST["Password"];
-$qry=mysqli_query($con,"select * from tbl_login where username='$email' and password='$pass'");
+$qry=mysqli_query($con,"select * from user where username='$username' and password='$pass'");
 if(mysqli_num_rows($qry))
 {
 	$usr=mysqli_fetch_array($qry);
-	if($usr['user_type']==2)
+	if($usr['username']==$username)
 	{
-		$_SESSION['user']=$usr['user_id'];
+		$_SESSION['user']=$usr['username'];
 		if(isset($_SESSION['show']))
 		{
 			header('location:booking.php');

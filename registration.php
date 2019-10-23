@@ -12,7 +12,7 @@
 				<div class="panel panel-default">
 				  <div class="panel-heading">Register</div>
 				  <div class="panel-body">
-				<form action="process_registration.php" method="post" id="form1">
+				<form action="nimit.php" method="post" id="form1">
 				    <div class="form-group has-feedback">
         <input name="name" type="text" size="25" placeholder="Name" class="form-control"/>
         
