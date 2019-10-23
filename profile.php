@@ -28,11 +28,10 @@ if(mysqli_num_rows($bk))
 <th>Booking Id</th>
 <th>Movie</th>
 <th>Theatre</th>
-<th>Screen</th>
+<!-- <th>Screen</th> -->
 <th>Show</th>
 <th>Seats</th>
 <th>Amount</th>
-<th></th>
 </thead>
 <tbody>
 <?php
@@ -41,8 +40,8 @@ while($bkg=mysqli_fetch_array($bk))
 // $m=mysqli_query($con,"select * from tbl_movie where movie_id=(select movie_id from tbl_shows where s_id='".$bkg['show_id']."')");
 $m=mysqli_query($con,"select * from movie where movie_id=(select movie_id from tbl_shows where s_id='".$bkg['show_id']."')");
 $mov=mysqli_fetch_array($m);
-$s=mysqli_query($con,"select * from tbl_screens where screen_id='".$bkg['screen_id']."'");
-$srn=mysqli_fetch_array($s);
+// $s=mysqli_query($con,"select * from tbl_screens where screen_id='".$bkg['screen_id']."'");
+// $srn=mysqli_fetch_array($s);
 $tt=mysqli_query($con,"select * from tbl_theatre where id='".$bkg['t_id']."'");
 $thr=mysqli_fetch_array($tt);
 $st=mysqli_query($con,"select * from tbl_show_time where st_id=(select st_id from tbl_shows where s_id='".$bkg['show_id']."')");
@@ -59,9 +58,6 @@ $stm=mysqli_fetch_array($st);
 <?php echo $thr['name'];?>
 </td>
 <td>
-<?php echo $srn['screen_name'];?>
-</td>
-<td>
 <?php echo $stm['name'];?>
 </td>
 <td>
@@ -69,20 +65,6 @@ $stm=mysqli_fetch_array($st);
 </td>
 <td>
 Rs <?php echo $bkg['amount'];?>
-</td>
-<td>
-<?php  if($bkg['ticket_date']<date('Y-m-d'))
-{
-?>
-<i class="glyphicon glyphicon-ok"></i>
-<?php
-}
-else
-{?>
-<a href="cancel.php?id=<?php echo $bkg['book_id'];?>">Cancel</a>
-<?php
-}
-?>
 </td>
 </tr>
 <?php
