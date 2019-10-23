@@ -10,7 +10,9 @@ extract($_POST);
 			
 			<?php
           	 $today=date("Y-m-d");
-          	$qry2=mysqli_query($con,"select DISTINCT movie_name,movie_id,image,cast from tbl_movie where movie_name='".$search."'");
+			//   $qry2=mysqli_query($con,"select DISTINCT movie_name,movie_id,image,cast from tbl_movie where movie_name='".$search."'");
+          	$qry2=mysqli_query($con,"select DISTINCT movie_name,movie_id,image,cast from movie where movie_name='".$search."'");
+			  
 						
           	  while($m=mysqli_fetch_array($qry2))
                    {

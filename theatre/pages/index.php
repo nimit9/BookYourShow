@@ -41,7 +41,8 @@ include('header.php');
 					$no=1;
 					while($mn=mysqli_fetch_array($qry8))
 					{
-					 $qry9=mysqli_query($con,"select * from tbl_movie where movie_id='".$mn['movie_id']."'");
+          //  $qry9=mysqli_query($con,"select * from tbl_movie where movie_id='".$mn['movie_id']."'");
+					 $qry9=mysqli_query($con,"select * from movie where movie_id='".$mn['movie_id']."'");           
 					 $mov=mysqli_fetch_array($qry9);
 					 $qry10=mysqli_query($con,"select * from tbl_show_time where st_id='".$mn['st_id']."'");
 					 $scr=mysqli_fetch_array($qry10);

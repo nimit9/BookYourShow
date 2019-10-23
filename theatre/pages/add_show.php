@@ -37,7 +37,8 @@ include('header.php');
               <select name="movie" class="form-control">
                 <option value>Select Movie</option>
                 <?php
-                  $mv=mysqli_query($con,"select * from tbl_movie where status='0'");
+                  // $mv=mysqli_query($con,"select * from tbl_movie where status='0'");
+                  $mv=mysqli_query($con,"select * from movie where status='0'");
                   while($movie=mysqli_fetch_array($mv))
                   {
                     ?>
