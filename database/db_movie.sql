@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `tbl_bookings`
 --
 
-CREATE TABLE `tbl_bookings` (
+CREATE TABLE IF NOT EXISTS `tbl_bookings` (
   `book_id` int(11) NOT NULL,
   `ticket_id` varchar(30) NOT NULL,
   `t_id` int(11) NOT NULL COMMENT 'theater id',
@@ -60,7 +60,7 @@ INSERT INTO `tbl_bookings` (`book_id`, `ticket_id`, `t_id`, `user_id`, `show_id`
 -- Table structure for table `tbl_contact`
 --
 
-CREATE TABLE `tbl_contact` (
+CREATE TABLE IF NOT EXISTS `tbl_contact` (
   `contact_id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
@@ -74,7 +74,7 @@ CREATE TABLE `tbl_contact` (
 -- Table structure for table `tbl_login`
 --
 
-CREATE TABLE `tbl_login` (
+CREATE TABLE IF NOT EXISTS `tbl_login` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `username` varchar(50) NOT NULL COMMENT 'email',
@@ -95,7 +95,7 @@ INSERT INTO `tbl_login` (`id`, `user_id`, `username`, `password`, `user_type`) V
 -- Table structure for table `tbl_movie`
 --
 
-CREATE TABLE `tbl_movie` (
+CREATE TABLE IF NOT EXISTS `tbl_movie` (
   `movie_id` int(11) NOT NULL,
   `t_id` int(11) NOT NULL COMMENT 'theatre id',
   `movie_name` varchar(100) NOT NULL,
@@ -124,7 +124,7 @@ INSERT INTO `tbl_movie` (`movie_id`, `t_id`, `movie_name`, `cast`, `desc`, `rele
 -- Table structure for table `tbl_news`
 --
 
-CREATE TABLE `tbl_news` (
+CREATE TABLE IF NOT EXISTS `tbl_news` (
   `news_id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `cast` varchar(100) NOT NULL,
@@ -148,7 +148,7 @@ INSERT INTO `tbl_news` (`news_id`, `name`, `cast`, `news_date`, `description`, `
 -- Table structure for table `tbl_registration`
 --
 
-CREATE TABLE `tbl_registration` (
+CREATE TABLE IF NOT EXISTS `tbl_registration` (
   `user_id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
@@ -170,7 +170,7 @@ INSERT INTO `tbl_registration` (`user_id`, `name`, `email`, `phone`, `age`, `gen
 -- Table structure for table `tbl_screens`
 --
 
-CREATE TABLE `tbl_screens` (
+CREATE TABLE IF NOT EXISTS `tbl_screens` (
   `screen_id` int(11) NOT NULL,
   `t_id` int(11) NOT NULL COMMENT 'theatre id',
   `screen_name` varchar(110) NOT NULL,
@@ -194,7 +194,7 @@ INSERT INTO `tbl_screens` (`screen_id`, `t_id`, `screen_name`, `seats`, `charge`
 -- Table structure for table `tbl_shows`
 --
 
-CREATE TABLE `tbl_shows` (
+CREATE TABLE IF NOT EXISTS `tbl_shows` (
   `s_id` int(11) NOT NULL,
   `st_id` int(11) NOT NULL COMMENT 'show time id',
   `theatre_id` int(11) NOT NULL,
@@ -234,7 +234,7 @@ INSERT INTO `tbl_shows` (`s_id`, `st_id`, `theatre_id`, `movie_id`, `start_date`
 -- Table structure for table `tbl_show_time`
 --
 
-CREATE TABLE `tbl_show_time` (
+CREATE TABLE IF NOT EXISTS `tbl_show_time` (
   `st_id` int(11) NOT NULL,
   `screen_id` int(11) NOT NULL,
   `name` varchar(40) NOT NULL COMMENT 'noon,second,etc',
@@ -266,7 +266,7 @@ INSERT INTO `tbl_show_time` (`st_id`, `screen_id`, `name`, `start_time`) VALUES
 -- Table structure for table `tbl_theatre`
 --
 
-CREATE TABLE `tbl_theatre` (
+CREATE TABLE IF NOT EXISTS `tbl_theatre` (
   `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `address` varchar(100) NOT NULL,
@@ -421,8 +421,83 @@ ALTER TABLE `tbl_show_time`
 --
 ALTER TABLE `tbl_theatre`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+CREATE TABLE IF NOT EXISTS `movie` (
+  `movie_id` int(11) NOT NULL,
+  `movie_name` varchar(100) NOT NULL,
+  `desc` varchar(1000) NOT NULL,
+  `genre` varchar(500),
+  `rating` int(11),
+  `release_date` date NOT NULL,
+  `cast` varchar(500) NOT NULL,
+  `runtime` int(11),
+  `image` varchar(200) NOT NULL,
+  `video_url` varchar(200) NOT NULL,
+  `status` int(1) NOT NULL COMMENT '0 means active '
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+ALTER TABLE `movie`
+  ADD PRIMARY KEY (`movie_id`);
+
+ALTER TABLE `movie`
+  MODIFY `movie_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+
+INSERT INTO `movie` (`movie_id`, `movie_name`, `cast`, `desc`, `release_date`, `image`, `video_url`, `status`, `genre`,`rating`, `runtime`)
+VALUES
+(1, 'War', 'Hrithik Roshan, Tiger Shroff, Vaani Kapoor', 'Khalid, an Indian Research and Analysis Wing (RAW) agent, is assigned to eliminate Kabir, a former soldier-turned-rogue, who mentored Khalid. Two years before Kabir betrayed his associates, he, along with Khalid and other agents, were on a search for criminal-turned businessman Rizwan Illiyasi', '2019-10-02', 'images/war.jpg', 'https://www.youtube.com/watch?v=tQ0mzXRk-oM', 0, 'Action', 4, 100),
+(2, 'Joker', 'Joaquin Phoenix', 'Arthur Fleck, a man struggling with loneliness and isolation, wears two masks. One, he paints on for his day job as a clown. The other is a guise he projects in an attempt to find his place in Gotham City`s fractured society. Caught in a cyclical existence between apathy and cruelty, Arthur begins to make one bad decision after another. What follows is a new take on the origin story of one of cinema`s most iconic villains.', '2019-10-02', 'images/joker.jpg', 'https://www.youtube.com/watch?v=t433PEQGErc', 0, 'Action', 4, 100),
+(3, 'Dream Girl', 'Ayushmann Khurrana, Nushrat Bharucha ', 'Ayushmann Khurrana in and as Dream Girl! From the local cop to a `Haryanvi` gujjar boy, to his girlfriend`s brother, everybody is smitten by Dream Girl Pooja and her mesmerising voice, leading to a series of unusual, crazy situations.\r\n\r\nSet against the backdrop of Mathura, Dream Girl is a comedy of errors that stars a crackling ensemble consisting Annu Kapoor, Vijay Raaz, Abhishek Bannerjee, Manjot Singh, Nidhi Bisht, Rajesh Sharma among others.', '2019-09-13', 'images/dreamGirl.jpg', 'https://www.youtube.com/watch?v=nf39Jpi3ZQ4', 0, 'Action', 4, 100),
+(8, 'Chhichhore', 'Sushant Singh Rajput, Shraddha Kapoor', 'Chhichhore takes you on an exuberant and hilarious journey through college life where you meet a bunch of interesting `losers`: Anni, Maya, Sexa, Derek, Mummy, Acid, and Bevda. They as a group go through a seamless transition from past to present and end up at a reunion they could never have thought of.', '2019-09-06', 'images/chhichhore.jpg', 'https://www.youtube.com/watch?v=tsxemFX0a7k', 0, 'Action', 4, 100),
+(10, 'The Sky is Pink', 'Priyanka Chopra Jonas, Farhan Akhtar', 'An incredible true love story of a couple spanning 25 years, told through the lens of their teenage sassy, sardonic, spunky and also dead daughter. A fact she nonchalantly mentions at the outset - \"Get over it. It`s quite cool actually. You`ll see when you get here (which you do know you will right?!)\"', '2019-10-11', 'images/sky.jpg', 'https://www.youtube.com/watch?v=prwUFBsDRLk', 0, 'Action', 4, 100);
+
+
+
+CREATE TABLE IF NOT EXISTS `shows` (
+  `s_id` int(11) NOT NULL,
+  `lang` varchar(500),
+  `date` date NOT NULL,
+  `time` time NOT NULL,
+  `theatre` varchar(200) NOT NULL,
+  `price` int(11) NOT NULL,
+  `seats` int(11) NOT NULL COMMENT 'number of seats',
+  `movie_id` int(11) NOT NULL,
+  `status` int(11) NOT NULL COMMENT '1 means show available',
+  FOREIGN KEY (`movie_id`) REFERENCES movie(`movie_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+ALTER TABLE `shows`
+  ADD PRIMARY KEY (`s_id`);
+
+ALTER TABLE `shows`
+  MODIFY `s_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+
+INSERT INTO `shows` (`s_id`, `theatre`, `movie_id`, `date`, `status`, `lang`, `time`,`price`,`seats`) VALUES
+(1, 'PVR: Andheri(E)',1, '2017-05-01', 1, 'hindi','10:00:00',100,50),
+(2, 'PVR: Andheri(E)',1, '2017-05-01', 1, 'hindi','10:00:00',100,50),
+(3, 'PVR: Andheri(E)',2, '2017-05-01', 1, 'hindi','10:00:00',100,50),
+(4, 'PVR: Andheri(E)',2, '2017-05-01', 1, 'hindi','10:00:00',100,50),
+(5, 'PVR: Andheri(E)',1, '2017-05-01', 1, 'hindi','10:00:00',100,50),
+(6, 'PVR: Andheri(E)',1, '2017-05-01', 1, 'hindi','10:00:00',100,50),
+(7, 'PVR: Andheri(E)',1, '2017-05-01', 1, 'hindi','10:00:00',100,50),
+(8, 'PVR: Andheri(E)',1, '2017-05-01', 1, 'hindi','10:00:00',100,50),
+(9, 'PVR: Andheri(E)',2, '2017-05-01', 1, 'hindi','10:00:00',100,50),
+(10, 'PVR: Andheri(E)',2, '2017-05-01', 1, 'hindi','10:00:00',100,50),
+(11, 'PVR: Andheri(E)',2, '2017-05-01', 1, 'hindi','10:00:00',100,50),
+(12, 'PVR: Andheri(E)',2, '2017-05-01', 1, 'hindi','10:00:00',100,50),
+(13, 'PVR: Andheri(E)',10, '2017-02-25', 1, 'hindi','10:00:00',100,50),
+(14, 'PVR: Andheri(E)',10, '2017-02-25', 1, 'hindi','10:00:00',100,50),
+(15,  'PVR: Andheri(E)',8, '2017-05-28', 1, 'hindi','10:00:00',100,50),
+(16,  'PVR: Andheri(E)',8, '2017-05-28', 1, 'hindi','10:00:00',100,50),
+(17,  'PVR: Andheri(E)',8, '2017-05-28', 1, 'hindi','10:00:00',100,50),
+(18,  'PVR: Andheri(E)',8, '2017-05-28', 1, 'hindi','10:00:00',100,50);
+
+
+COMMIT;
