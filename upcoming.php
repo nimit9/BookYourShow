@@ -15,16 +15,16 @@
         </div>
       </div>
       <div class="carousel-item" style="height:450px;">
-        <img src="admin/news_images/aankh.jpg" style="height:450px;" class="d-block w-100" alt="...">
+        <img src="admin/news_images/dabang.jpg" style="height:450px;" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
-          <h2>Saand Ki Aankh</h2>
+          <h2>Dabangg 3</h2>
           <p></p>
         </div>
       </div>
       <div class="carousel-item" style="height:450px;">
-        <img src="admin/news_images/china.jpg" style="height:450px;" class="d-block w-100" alt="...">
+        <img src="admin/news_images/bala.jpg" style="height:450px;" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
-          <h2>Made in China</h2>
+          <h2>Bala</h2>
           <p></p>
         </div>
       </div>
@@ -32,6 +32,13 @@
         <img src="admin/news_images/terminator.jpg" style="height:450px;" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
           <h2>Terminator</h2>
+          <p></p>
+        </div>
+      </div>
+      <div class="carousel-item" style="height:450px;" >
+        <img src="admin/news_images/laal.jpg" style="height:450px;" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h2>Laal Kaptaan</h2>
           <p></p>
         </div>
       </div>

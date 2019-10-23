@@ -10,15 +10,7 @@ include('header.php');
 	<div class="wrap">
 	<h2 class="w3-center">UPCOMING MOVIES</h2>
 
-<!-- <div class="w3-content w3-display-container"> 
-  <img class="mySlides" src="admin/news_images/housefull.jpg" style="width:100%; height:400px;">
-  <img class="mySlides" src="admin/news_images/aankh.jpg" style="width:100%; height:400px;">
-  <img class="mySlides" src="admin/news_images/china.jpg" style="width:100%; height:400px;">
-  <img class="mySlides" src="admin/news_images/terminator.jpg" style="width:100%; height:400px;">
 
-  <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
-  <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
-</div> -->
 <?php include('upcoming.php');?>	
 <hr> 
 <?php include('movie_sidebar.php');?>

@@ -22,7 +22,7 @@ SET time_zone = "+00:00";
 -- Database: `db_movie`
 --
 
--- --------------------------------------------------------
+
 
 --
 -- Table structure for table `tbl_bookings`
@@ -294,8 +294,15 @@ INSERT INTO `tbl_theatre` (`id`, `name`, `address`, `place`, `state`, `pin`) VAL
 (13, 'rye', 'yetyy', 'Yeyeye Hotel, Changchun, Jilin, China', 'Jilin Sheng', 130012),
 (14, 'Trinity Movies', 'Pathanamthtta', 'Pathanamthitta, Kerala, India', 'Kerala', 691554);
 
+
+
+
 --
 -- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `user`
 --
 
 --
@@ -422,6 +429,24 @@ ALTER TABLE `tbl_show_time`
 ALTER TABLE `tbl_theatre`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
+
+CREATE TABLE IF NOT EXISTS `user` (
+  
+  `username` varchar(50) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `phone_no` (11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO `user` (`username`, `name`, `password`, `email`, `phone_no`) VALUES
+('nimitharia', 'Nimit', '12345678', 'nimitharia007@gmail.com', '9987207076'); 
+
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`username`);
+
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
@@ -501,3 +526,4 @@ INSERT INTO `shows` (`s_id`, `theatre`, `movie_id`, `date`, `status`, `lang`, `t
 
 
 COMMIT;
+
