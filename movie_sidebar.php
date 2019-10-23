@@ -6,7 +6,10 @@
 					
 					<?php
           	 $today=date("Y-m-d");
-			  $qry2=mysqli_query($con,"select * from  tbl_movie where status='0'");?>
+			//   $qry2=mysqli_query($con,"select * from  tbl_movie where status='0'");
+			  $qry2=mysqli_query($con,"select * from  movie where status='0'");
+			  ?>
+			  
 			  <div class="card-deck">
 				  
 				  <?php

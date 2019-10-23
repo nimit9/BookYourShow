@@ -7,8 +7,9 @@
 			
 			<?php
           	 $today=date("Y-m-d");
-          	 $qry2=mysqli_query($con,"select * from  tbl_movie ");
-		
+          	//  $qry2=mysqli_query($con,"select * from  tbl_movie ");
+			$qry2=mysqli_query($con,"select * from  movie ");
+
           	  while($m=mysqli_fetch_array($qry2))
                    {
                     ?>

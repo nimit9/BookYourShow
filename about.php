@@ -1,5 +1,6 @@
 	<?php include('header.php');
-	$qry2=mysqli_query($con,"select * from tbl_movie where movie_id='".$_GET['id']."'");
+	// $qry2=mysqli_query($con,"select * from tbl_movie where movie_id='".$_GET['id']."'");
+	$qry2=mysqli_query($con,"select * from movie where movie_id='".$_GET['id']."'");
 	$movie=mysqli_fetch_array($qry2);
 	?>
 	<div class="content">

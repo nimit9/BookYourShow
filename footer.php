@@ -76,7 +76,8 @@
             source: function(term, suggest){
                 term = term.toLowerCase();
                 <?php
-						$qry2=mysqli_query($con,"select * from tbl_movie");
+						// $qry2=mysqli_query($con,"select * from tbl_movie");
+						$qry2=mysqli_query($con,"select * from movie");
 						?>
                var string="";
                 <?php $string="";
