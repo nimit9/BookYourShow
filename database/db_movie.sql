@@ -431,16 +431,16 @@ ALTER TABLE `tbl_theatre`
 
 
 CREATE TABLE IF NOT EXISTS `user` (
-  
   `username` varchar(50) NOT NULL,
   `name` varchar(100) NOT NULL,
   `password` varchar(50) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `phone_no` (11) NOT NULL
+  `phone_no` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `user` (`username`, `name`, `password`, `email`, `phone_no`) VALUES
-('nimitharia', 'Nimit', '12345678', 'nimitharia007@gmail.com', '9987207076'); 
+('nimitharia', 'Nimit', '12345678', 'nimitharia007@gmail.com', '9987207076'),
+('admin', 'admin', '12345678', 'admin@gmail.com', '9987207076'); 
 
 ALTER TABLE `user`
   ADD PRIMARY KEY (`username`);
@@ -523,6 +523,37 @@ INSERT INTO `shows` (`s_id`, `theatre`, `movie_id`, `date`, `status`, `lang`, `t
 (16,  'PVR: Andheri(E)',8, '2017-05-28', 1, 'hindi','10:00:00',100,50),
 (17,  'PVR: Andheri(E)',8, '2017-05-28', 1, 'hindi','10:00:00',100,50),
 (18,  'PVR: Andheri(E)',8, '2017-05-28', 1, 'hindi','10:00:00',100,50);
+
+
+
+CREATE TABLE IF NOT EXISTS `tickets` (
+  `book_id` int(11) NOT NULL,
+  `ticket_id` varchar(30) NOT NULL,
+  `user` varchar(50) NOT NULL,
+  `show_id` int(11) NOT NULL,
+  `no_seats` int(3) NOT NULL COMMENT 'number of seats',
+  `amount` int(5) NOT NULL,
+  `status` int(1) NOT NULL,
+  FOREIGN KEY (`show_id`) REFERENCES shows(`s_id`),
+  FOREIGN KEY (`user`) REFERENCES user(`username`)
+
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+ALTER TABLE `tickets`
+  ADD PRIMARY KEY (`book_id`);
+
+ALTER TABLE `tickets`
+  MODIFY `book_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+
+INSERT INTO `tickets` (`book_id`, `ticket_id`, `user`, `show_id`,  `no_seats`, `amount`, `status`) VALUES
+(3, 'BKID5258812', 'admin', 3, 200, 75,  1),
+(4, 'BKID5258811', 'admin', 5, 2,   150,   1),
+(5, 'BKID5258815', 'admin', 2, 200, 70,  1),
+(6, 'BKID5258836', 'admin', 1, 100, 70,  1),
+(7, 'BKID5258876', 'admin', 10, 1, 70, 1),
+(11, 'BKID5258816','admin', 13, 1, 75, 1);
 
 
 COMMIT;

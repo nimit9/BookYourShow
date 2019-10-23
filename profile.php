@@ -15,7 +15,11 @@ if(!isset($_SESSION['user']))
 						<h3>BOOKINGS</h3>
 						<?php include('msgbox.php');?>
 <?php
-$bk=mysqli_query($con,"select * from tbl_bookings where user_id='".$_SESSION['user']."'");
+// $bk=mysqli_query($con,"select * from tbl_bookings where user_id='".$_SESSION['user']."'");
+$bk=mysqli_query($con,"select * from tickets where user='".$_SESSION['user']."'");
+echo '<pre>';
+var_dump($_SESSION);
+echo '</pre>';
 if(mysqli_num_rows($bk))
 {
 ?>

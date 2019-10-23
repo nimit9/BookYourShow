@@ -87,7 +87,8 @@ $_SESSION['dd']=$date;
 <?php if($date!=date('Y-m-d',strtotime($_SESSION['dd'] . "+4 days"))){?>
 <a href="booking.php?date=<?php echo date('Y-m-d',strtotime($date . "+1 days"));?>"><button class="btn btn-default"><i class="glyphicon glyphicon-chevron-right"></i></button></a>
 <?php }
-$av=mysqli_query($con,"select sum(no_seats) from tbl_bookings where show_id='".$_SESSION['show']."' and ticket_date='$date'");
+// $av=mysqli_query($con,"select sum(no_seats) from tbl_bookings where show_id='".$_SESSION['show']."' and ticket_date='$date'");
+$av=mysqli_query($con,"select sum(no_seats) from tickets where show_id='".$_SESSION['show']."'");
 $avl=mysqli_fetch_array($av);
 ?>
 </div>
