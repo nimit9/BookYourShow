@@ -22,13 +22,13 @@ SET time_zone = "+00:00";
 -- Database: `db_movie`
 --
 
--- --------------------------------------------------------
+
 
 --
 -- Table structure for table `tbl_bookings`
 --
 
-CREATE TABLE `tbl_bookings` (
+CREATE TABLE IF NOT EXISTS `tbl_bookings` (
   `book_id` int(11) NOT NULL,
   `ticket_id` varchar(30) NOT NULL,
   `t_id` int(11) NOT NULL COMMENT 'theater id',
@@ -60,7 +60,7 @@ INSERT INTO `tbl_bookings` (`book_id`, `ticket_id`, `t_id`, `user_id`, `show_id`
 -- Table structure for table `tbl_contact`
 --
 
-CREATE TABLE `tbl_contact` (
+CREATE TABLE IF NOT EXISTS `tbl_contact` (
   `contact_id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
@@ -74,7 +74,7 @@ CREATE TABLE `tbl_contact` (
 -- Table structure for table `tbl_login`
 --
 
-CREATE TABLE `tbl_login` (
+CREATE TABLE IF NOT EXISTS `tbl_login` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `username` varchar(50) NOT NULL COMMENT 'email',
@@ -95,7 +95,7 @@ INSERT INTO `tbl_login` (`id`, `user_id`, `username`, `password`, `user_type`) V
 -- Table structure for table `tbl_movie`
 --
 
-CREATE TABLE `tbl_movie` (
+CREATE TABLE IF NOT EXISTS `tbl_movie` (
   `movie_id` int(11) NOT NULL,
   `t_id` int(11) NOT NULL COMMENT 'theatre id',
   `movie_name` varchar(100) NOT NULL,
@@ -124,7 +124,7 @@ INSERT INTO `tbl_movie` (`movie_id`, `t_id`, `movie_name`, `cast`, `desc`, `rele
 -- Table structure for table `tbl_news`
 --
 
-CREATE TABLE `tbl_news` (
+CREATE TABLE IF NOT EXISTS `tbl_news` (
   `news_id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `cast` varchar(100) NOT NULL,
@@ -148,7 +148,7 @@ INSERT INTO `tbl_news` (`news_id`, `name`, `cast`, `news_date`, `description`, `
 -- Table structure for table `tbl_registration`
 --
 
-CREATE TABLE `tbl_registration` (
+CREATE TABLE IF NOT EXISTS `tbl_registration` (
   `user_id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
@@ -170,7 +170,7 @@ INSERT INTO `tbl_registration` (`user_id`, `name`, `email`, `phone`, `age`, `gen
 -- Table structure for table `tbl_screens`
 --
 
-CREATE TABLE `tbl_screens` (
+CREATE TABLE IF NOT EXISTS `tbl_screens` (
   `screen_id` int(11) NOT NULL,
   `t_id` int(11) NOT NULL COMMENT 'theatre id',
   `screen_name` varchar(110) NOT NULL,
@@ -194,7 +194,7 @@ INSERT INTO `tbl_screens` (`screen_id`, `t_id`, `screen_name`, `seats`, `charge`
 -- Table structure for table `tbl_shows`
 --
 
-CREATE TABLE `tbl_shows` (
+CREATE TABLE IF NOT EXISTS `tbl_shows` (
   `s_id` int(11) NOT NULL,
   `st_id` int(11) NOT NULL COMMENT 'show time id',
   `theatre_id` int(11) NOT NULL,
@@ -234,7 +234,7 @@ INSERT INTO `tbl_shows` (`s_id`, `st_id`, `theatre_id`, `movie_id`, `start_date`
 -- Table structure for table `tbl_show_time`
 --
 
-CREATE TABLE `tbl_show_time` (
+CREATE TABLE IF NOT EXISTS `tbl_show_time` (
   `st_id` int(11) NOT NULL,
   `screen_id` int(11) NOT NULL,
   `name` varchar(40) NOT NULL COMMENT 'noon,second,etc',
@@ -266,7 +266,7 @@ INSERT INTO `tbl_show_time` (`st_id`, `screen_id`, `name`, `start_time`) VALUES
 -- Table structure for table `tbl_theatre`
 --
 
-CREATE TABLE `tbl_theatre` (
+CREATE TABLE IF NOT EXISTS `tbl_theatre` (
   `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `address` varchar(100) NOT NULL,
@@ -294,8 +294,15 @@ INSERT INTO `tbl_theatre` (`id`, `name`, `address`, `place`, `state`, `pin`) VAL
 (13, 'rye', 'yetyy', 'Yeyeye Hotel, Changchun, Jilin, China', 'Jilin Sheng', 130012),
 (14, 'Trinity Movies', 'Pathanamthtta', 'Pathanamthitta, Kerala, India', 'Kerala', 691554);
 
+
+
+
 --
 -- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `user`
 --
 
 --
@@ -421,8 +428,28 @@ ALTER TABLE `tbl_show_time`
 --
 ALTER TABLE `tbl_theatre`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+
+CREATE TABLE IF NOT EXISTS `user` (
+  
+  `username` varchar(50) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `phone_no` (11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO `user` (`username`, `name`, `password`, `email`, `phone_no`) VALUES
+('nimitharia', 'Nimit', '12345678', 'nimitharia007@gmail.com', '9987207076'); 
+
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`username`);
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+
