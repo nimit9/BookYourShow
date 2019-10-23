@@ -27,10 +27,10 @@ $movie=mysqli_fetch_array($qry2);
 </div>
 <table class="table table-hover table-bordered text-center">
 <?php
-$s=mysqli_query($con,"select * from tbl_shows where s_id='".$_SESSION['show']."'");
+$s=mysqli_query($con,"select * from shows where s_id='".$_SESSION['show']."'");
 $shw=mysqli_fetch_array($s);
 
-$t=mysqli_query($con,"select * from tbl_theatre where id='".$shw['theatre_id']."'");
+$t=mysqli_query($con,"select * from theatre where t_id='".$shw['theatre']."'");
 $theatre=mysqli_fetch_array($t);
 ?>
 <tr>
@@ -38,7 +38,7 @@ $theatre=mysqli_fetch_array($t);
 	Theatre
 </td>
 <td>
-	<?php echo $theatre['name'].", ".$theatre['place'];?>
+	<?php echo $theatre['name'];?>
 </td>
 </tr>
 <tr>
@@ -47,14 +47,9 @@ $theatre=mysqli_fetch_array($t);
 	</td>
 <td>
 	<?php 
-		$ttm=mysqli_query($con,"select  * from tbl_show_time where st_id='".$shw['st_id']."'");
-		
-		$ttme=mysqli_fetch_array($ttm);
-		
-		$sn=mysqli_query($con,"select  * from tbl_screens where screen_id='".$ttme['screen_id']."'");
-		
-		$screen=mysqli_fetch_array($sn);
-		echo $screen['screen_name'];
+		$n = rand(1,3);
+		echo "Screen $n";
+     
 
 		?>
 </td>
@@ -71,9 +66,9 @@ $date=$_GET['date'];
 }
 else
 {
-if($shw['start_date']>date('Y-m-d'))
+if($shw['date']>date('Y-m-d'))
 {
-$date=date('Y-m-d',strtotime($shw['start_date'] . "-1 days"));
+$date=date('Y-m-d',strtotime($shw['date'] . "-1 days"));
 }
 else
 {
@@ -87,7 +82,6 @@ $_SESSION['dd']=$date;
 <?php if($date!=date('Y-m-d',strtotime($_SESSION['dd'] . "+4 days"))){?>
 <a href="booking.php?date=<?php echo date('Y-m-d',strtotime($date . "+1 days"));?>"><button class="btn btn-default"><i class="glyphicon glyphicon-chevron-right"></i></button></a>
 <?php }
-// $av=mysqli_query($con,"select sum(no_seats) from tbl_bookings where show_id='".$_SESSION['show']."' and ticket_date='$date'");
 $av=mysqli_query($con,"select sum(no_seats) from tickets where show_id='".$_SESSION['show']."'");
 $avl=mysqli_fetch_array($av);
 ?>
@@ -99,7 +93,14 @@ $avl=mysqli_fetch_array($av);
 	Show Time
 </td>
 <td>
-	<?php echo date('h:i A',strtotime($ttme['start_time']))." ".$ttme['name'];?> Show
+
+												
+												
+	<?php 
+	$ttm=mysqli_query($con,"select  * from show_time where st_id='".$shw['time']."'");
+												
+	$ttme=mysqli_fetch_array($ttm);
+	echo date('h:i A',strtotime($ttme['start_time']));?>
 </td>
 </tr>
 <tr>
@@ -108,9 +109,9 @@ $avl=mysqli_fetch_array($av);
 </td>
 <td>
 	<form  action="process_booking.php" method="post">
-		<input type="hidden" name="screen" value="<?php echo $screen['screen_id'];?>"/>
-	<input type="number" required tile="Number of Seats" max="<?php echo $screen['seats']-$avl[0];?>" min="0" name="seats" class="form-control" value="1" style="text-align:center" id="seats"/>
-	<input type="hidden" name="amount" id="hm" value="<?php echo $screen['charge'];?>"/>
+		<input type="hidden" name="seats" value="<?php echo $shw['s_id'];?>"/>
+	<input type="number" required tile="Number of Seats" min="0" name="seats" class="form-control" value="1" style="text-align:center" id="seats"/>
+	<input type="hidden" name="amount" id="hm" value="<?php echo $shw['price'];?>"/>
 	<input type="hidden" name="date" value="<?php echo $date;?>"/>
 </td>
 </tr>
@@ -119,11 +120,11 @@ $avl=mysqli_fetch_array($av);
 	Amount
 </td>
 <td id="amount" style="font-weight:bold;font-size:18px">
-	Rs <?php echo $screen['charge'];?>
+	Rs <?php echo $shw['price'];?>
 </td>
 </tr>
 <tr>
-<td colspan="2"><?php if($avl[0]==$screen['seats']){?><button type="button" class="btn btn-danger" style="width:100%">House Full</button><?php } else { ?>
+<td colspan="2"><?php if($avl[0]==$shw['seats']){?><button type="button" class="btn btn-danger" style="width:100%">House Full</button><?php } else { ?>
 <button class="btn btn-info" style="width:100%">Book Now</button>
 <?php } ?>
 </form></td>
@@ -143,7 +144,7 @@ $avl=mysqli_fetch_array($av);
 <?php include('footer.php');?>
 <script type="text/javascript">
 $('#seats').change(function(){
-var charge=<?php echo $screen['charge'];?>;
+var charge=<?php echo $shw['price'];?>;
 amount=charge*$(this).val();
 $('#amount').html("Rs "+amount);
 $('#hm').val(amount);

@@ -3,7 +3,6 @@ if(!isset($_SESSION['user']))
 {
 	header('location:login.php');
 }
-	// $qry2=mysqli_query($con,"select * from tbl_movie where movie_id='".$_SESSION['movie']."'");
 	$qry2=mysqli_query($con,"select * from movie where movie_id='".$_SESSION['movie']."'");
 	$movie=mysqli_fetch_array($qry2);
 	?>
@@ -15,7 +14,6 @@ if(!isset($_SESSION['user']))
 						<h3>BOOKINGS</h3>
 						<?php include('msgbox.php');?>
 <?php
-// $bk=mysqli_query($con,"select * from tbl_bookings where user_id='".$_SESSION['user']."'");
 $bk=mysqli_query($con,"select * from tickets where user='".$_SESSION['user']."'");
 echo '<pre>';
 var_dump($_SESSION);
@@ -37,14 +35,13 @@ if(mysqli_num_rows($bk))
 <?php
 while($bkg=mysqli_fetch_array($bk))
 {
-// $m=mysqli_query($con,"select * from tbl_movie where movie_id=(select movie_id from tbl_shows where s_id='".$bkg['show_id']."')");
-$m=mysqli_query($con,"select * from movie where movie_id=(select movie_id from tbl_shows where s_id='".$bkg['show_id']."')");
+
+$m=mysqli_query($con,"select * from movie where movie_id=(select movie_id from shows where s_id='".$bkg['show_id']."')");
 $mov=mysqli_fetch_array($m);
-// $s=mysqli_query($con,"select * from tbl_screens where screen_id='".$bkg['screen_id']."'");
-// $srn=mysqli_fetch_array($s);
-$tt=mysqli_query($con,"select * from tbl_theatre where id='".$bkg['t_id']."'");
+
+$tt=mysqli_query($con,"select * from theater where t_id=(select theatre from shows where s_id='".$bkg['show_id']."')");
 $thr=mysqli_fetch_array($tt);
-$st=mysqli_query($con,"select * from tbl_show_time where st_id=(select st_id from tbl_shows where s_id='".$bkg['show_id']."')");
+$st=mysqli_query($con,"select * from show_time where st_id=(select time from shows where s_id='".$bkg['show_id']."')");
 $stm=mysqli_fetch_array($st);
 ?>
 <tr>
@@ -58,7 +55,7 @@ $stm=mysqli_fetch_array($st);
 <?php echo $thr['name'];?>
 </td>
 <td>
-<?php echo $stm['name'];?>
+<?php echo date('h:i A',strtotime($stm['start_time']));?>
 </td>
 <td>
 <?php echo $bkg['no_seats'];?>

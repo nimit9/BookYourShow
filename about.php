@@ -1,5 +1,5 @@
 	<?php include('header.php');
-	$qry2=mysqli_query($con,"select * from movie where movie_id='".$_GET['id']."'");
+	$qry2=mysqli_query($con,"select * from tbl_movie where movie_id='".$_GET['id']."'");
 	$movie=mysqli_fetch_array($qry2);
 	?>
 	<div class="content">
@@ -28,19 +28,23 @@
 
 	while($shw=mysqli_fetch_array($s))
 	{
-	
+	$t=mysqli_query($con,"select * from theatre where t_id='".$shw['theatre']."'");
+	$theatre=mysqli_fetch_array($t);
 	?>
 	<tr>
+	<td>
+	<?php echo $theatre['name'];?>
+	</td>
 	<td>
 	<?php $tr=mysqli_query($con,"select * from shows where movie_id='".$movie['movie_id']."' and theatre='".$shw['theatre']."'");
 	while($shh=mysqli_fetch_array($tr))
 	{
-	$ttm=mysqli_query($con,"select  * from tbl_show_time where st_id='".$shh['st_id']."'");
+	$ttm=mysqli_query($con,"select  * from show_time where st_id='".$shh['time']."'");
 	$ttme=mysqli_fetch_array($ttm);
 
 	?>
 
-	<a href="check_login.php?show=<?php echo $shh['s_id'];?>&movie=<?php echo $shh['movie_id'];?>&theatre=<?php echo $shw['theatre_id'];?>"><button class="btn btn-default"><?php echo date('h:i A',strtotime($ttme['start_time']));?></button></a>
+	<a href="check_login.php?show=<?php echo $shh['s_id'];?>&movie=<?php echo $shh['movie_id'];?>&theatre=<?php echo $shw['theatre'];?>"><button class="btn btn-default"><?php echo date('h:i A',strtotime($ttme['start_time']));?></button></a>
 	<?php
 	}
 	?>

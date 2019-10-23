@@ -482,19 +482,61 @@ VALUES
 (8, 'Chhichhore', 'Sushant Singh Rajput, Shraddha Kapoor', 'Chhichhore takes you on an exuberant and hilarious journey through college life where you meet a bunch of interesting `losers`: Anni, Maya, Sexa, Derek, Mummy, Acid, and Bevda. They as a group go through a seamless transition from past to present and end up at a reunion they could never have thought of.', '2019-09-06', 'images/chhichhore.jpg', 'https://www.youtube.com/watch?v=tsxemFX0a7k', 0, 'Action', 4, 100),
 (10, 'The Sky is Pink', 'Priyanka Chopra Jonas, Farhan Akhtar', 'An incredible true love story of a couple spanning 25 years, told through the lens of their teenage sassy, sardonic, spunky and also dead daughter. A fact she nonchalantly mentions at the outset - \"Get over it. It`s quite cool actually. You`ll see when you get here (which you do know you will right?!)\"', '2019-10-11', 'images/sky.jpg', 'https://www.youtube.com/watch?v=prwUFBsDRLk', 0, 'Action', 4, 100);
 
+CREATE TABLE IF NOT EXISTS `theatre` (
+  `t_id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL
+
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO `theatre` (`t_id`, `name`) VALUES
+(2, 'Miraj Thakur Cinema'),
+(3, 'PVR: Andheri(E)'),
+(4, 'INOX: Megaplex, Inorbit Mall'),
+(5, 'INOX: Megaplex, Inorbit Mall');
+
+ALTER TABLE `theatre`
+  ADD PRIMARY KEY (`t_id`);
+
+CREATE TABLE IF NOT EXISTS `show_time` (
+  `st_id` int(11) NOT NULL,
+  `start_time` time NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_show_time`
+--
+
+INSERT INTO `show_time` (`st_id`, `start_time`) VALUES
+(1,'10:00:00'),
+(2,'14:00:00'),
+(4,'21:00:00'),
+(5,'10:00:00'),
+(6,'14:00:00'),
+(9,'10:00:00'),
+(10,'14:00:00');
+
+
+ALTER TABLE `show_time`
+  ADD PRIMARY KEY (`st_id`);
+
+
+
 
 
 CREATE TABLE IF NOT EXISTS `shows` (
   `s_id` int(11) NOT NULL,
   `lang` varchar(500),
   `date` date NOT NULL,
-  `time` time NOT NULL,
-  `theatre` varchar(200) NOT NULL,
+  `time` int(11) NOT NULL,
+  `theatre` int(11) NOT NULL,
   `price` int(11) NOT NULL,
   `seats` int(11) NOT NULL COMMENT 'number of seats',
   `movie_id` int(11) NOT NULL,
   `status` int(11) NOT NULL COMMENT '1 means show available',
-  FOREIGN KEY (`movie_id`) REFERENCES movie(`movie_id`)
+  FOREIGN KEY (`movie_id`) REFERENCES movie(`movie_id`),
+  FOREIGN KEY (`theatre`) REFERENCES theatre(`t_id`),
+  FOREIGN KEY (`time`) REFERENCES show_time(`st_id`)
+
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 ALTER TABLE `shows`
@@ -505,24 +547,12 @@ ALTER TABLE `shows`
 
 
 INSERT INTO `shows` (`s_id`, `theatre`, `movie_id`, `date`, `status`, `lang`, `time`,`price`,`seats`) VALUES
-(1, 'PVR: Andheri(E)',1, '2017-05-01', 1, 'hindi','10:00:00',100,50),
-(2, 'PVR: Andheri(E)',1, '2017-05-01', 1, 'hindi','10:00:00',100,50),
-(3, 'PVR: Andheri(E)',2, '2017-05-01', 1, 'hindi','10:00:00',100,50),
-(4, 'PVR: Andheri(E)',2, '2017-05-01', 1, 'hindi','10:00:00',100,50),
-(5, 'PVR: Andheri(E)',1, '2017-05-01', 1, 'hindi','10:00:00',100,50),
-(6, 'PVR: Andheri(E)',1, '2017-05-01', 1, 'hindi','10:00:00',100,50),
-(7, 'PVR: Andheri(E)',1, '2017-05-01', 1, 'hindi','10:00:00',100,50),
-(8, 'PVR: Andheri(E)',1, '2017-05-01', 1, 'hindi','10:00:00',100,50),
-(9, 'PVR: Andheri(E)',2, '2017-05-01', 1, 'hindi','10:00:00',100,50),
-(10, 'PVR: Andheri(E)',2, '2017-05-01', 1, 'hindi','10:00:00',100,50),
-(11, 'PVR: Andheri(E)',2, '2017-05-01', 1, 'hindi','10:00:00',100,50),
-(12, 'PVR: Andheri(E)',2, '2017-05-01', 1, 'hindi','10:00:00',100,50),
-(13, 'PVR: Andheri(E)',10, '2017-02-25', 1, 'hindi','10:00:00',100,50),
-(14, 'PVR: Andheri(E)',10, '2017-02-25', 1, 'hindi','10:00:00',100,50),
-(15,  'PVR: Andheri(E)',8, '2017-05-28', 1, 'hindi','10:00:00',100,50),
-(16,  'PVR: Andheri(E)',8, '2017-05-28', 1, 'hindi','10:00:00',100,50),
-(17,  'PVR: Andheri(E)',8, '2017-05-28', 1, 'hindi','10:00:00',100,50),
-(18,  'PVR: Andheri(E)',8, '2017-05-28', 1, 'hindi','10:00:00',100,50);
+(1,2,1, '2017-05-01', 1, 'hindi',1,100,50),
+(2,3,1, '2017-05-01', 1, 'hindi',2,100,50),
+(3,5,2, '2017-05-01', 1, 'hindi',5,100,50),
+(4,4,2, '2017-05-01', 1, 'hindi',6,100,50),
+(5,3,1, '2017-05-01', 1, 'hindi',9,100,50),
+(6,2,1, '2017-05-01', 1, 'hindi',5,100,50);
 
 
 
@@ -552,9 +582,11 @@ INSERT INTO `tickets` (`book_id`, `ticket_id`, `user`, `show_id`,  `no_seats`, `
 (4, 'BKID5258811', 'admin', 5, 2,   150,   1),
 (5, 'BKID5258815', 'admin', 2, 200, 70,  1),
 (6, 'BKID5258836', 'admin', 1, 100, 70,  1),
-(7, 'BKID5258876', 'admin', 10, 1, 70, 1),
-(11, 'BKID5258816','admin', 13, 1, 75, 1);
+(7, 'BKID5258876', 'admin', 6, 1, 70, 1),
+(11, 'BKID5258816','admin', 3, 1, 75, 1);
 
 
 COMMIT;
+
+
 
