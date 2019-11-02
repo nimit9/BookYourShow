@@ -21,9 +21,7 @@
     <li class="nav-item">
       <a class="nav-link" href="index.php">Home</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" href="movies_events.php">Movies</a>
-    </li>
+   
 
     <!-- Dropdown --> 
        <li class="nav-item dropdown mr-5">

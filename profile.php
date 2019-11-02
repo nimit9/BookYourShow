@@ -14,10 +14,12 @@ if(!isset($_SESSION['user']))
 						<h3>BOOKINGS</h3>
 						<?php include('msgbox.php');?>
 <?php
-$bk=mysqli_query($con,"select * from tickets where user='".$_SESSION['user']."'");
-echo '<pre>';
-var_dump($_SESSION);
-echo '</pre>';
+$user = $_SESSION['user'];
+$bk=mysqli_query($con,"select * from tickets inner join shows on tickets.show_id = shows.s_id inner join theatre on shows.theatre=theatre.t_id where user='$user'");
+// echo '<pre>';
+// var_dump($_SESSION);
+// var_dump(mysqli_fetch_array($bk));
+// echo '</pre>';
 if(mysqli_num_rows($bk))
 {
 ?>
@@ -26,21 +28,21 @@ if(mysqli_num_rows($bk))
 <th>Booking Id</th>
 <th>Movie</th>
 <th>Theatre</th>
-<!-- <th>Screen</th> -->
-<th>Show</th>
+<th>Show Time</th>
 <th>Seats</th>
 <th>Amount</th>
 </thead>
 <tbody>
 <?php
+
 while($bkg=mysqli_fetch_array($bk))
 {
+	$showId = intval($bkg['show_id']);
+	
 
 $m=mysqli_query($con,"select * from movie where movie_id=(select movie_id from shows where s_id='".$bkg['show_id']."')");
 $mov=mysqli_fetch_array($m);
 
-$tt=mysqli_query($con,"select * from theater where t_id=(select theatre from shows where s_id='".$bkg['show_id']."')");
-$thr=mysqli_fetch_array($tt);
 $st=mysqli_query($con,"select * from show_time where st_id=(select time from shows where s_id='".$bkg['show_id']."')");
 $stm=mysqli_fetch_array($st);
 ?>
@@ -52,7 +54,7 @@ $stm=mysqli_fetch_array($st);
 <?php echo $mov['movie_name'];?>
 </td>
 <td>
-<?php echo $thr['name'];?>
+<?php echo $bkg['name'];?>
 </td>
 <td>
 <?php echo date('h:i A',strtotime($stm['start_time']));?>

@@ -8,35 +8,35 @@
     </ol>
     <div class="carousel-inner">
       <div class="carousel-item active" style="height:450px;">
-        <img src="admin/news_images/housefull.jpg" style="height:450px;" class="d-block w-100" alt="...">
+        <img src="images/housefull.jpg" style="height:450px;" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
           <h2>Housefull 4</h2>
           <p></p>
         </div>
       </div>
       <div class="carousel-item" style="height:450px;">
-        <img src="admin/news_images/dabang.jpg" style="height:450px;" class="d-block w-100" alt="...">
+        <img src="images/dabang.jpg" style="height:450px;" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
           <h2>Dabangg 3</h2>
           <p></p>
         </div>
       </div>
       <div class="carousel-item" style="height:450px;">
-        <img src="admin/news_images/bala.jpg" style="height:450px;" class="d-block w-100" alt="...">
+        <img src="images/bala.jpg" style="height:450px;" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
           <h2>Bala</h2>
           <p></p>
         </div>
       </div>
       <div class="carousel-item" style="height:450px;" >
-        <img src="admin/news_images/terminator.jpg" style="height:450px;" class="d-block w-100" alt="...">
+        <img src="images/terminator.jpg" style="height:450px;" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
           <h2>Terminator</h2>
           <p></p>
         </div>
       </div>
       <div class="carousel-item" style="height:450px;" >
-        <img src="admin/news_images/laal.jpg" style="height:450px;" class="d-block w-100" alt="...">
+        <img src="images/laal.jpg" style="height:450px;" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
           <h2>Laal Kaptaan</h2>
           <p></p>
